@@ -24,4 +24,13 @@ public class UserService {
 		Optional<User> user = repository.findById(id);
 		return user.get();
 	}
+	
+	public User insert(User user) {
+		User newUser = repository.save(user);
+		return newUser;
+	}
+	
+	public void deleteById(Long id) {
+		repository.deleteById(id);
+	}
 }

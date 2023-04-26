@@ -23,4 +23,13 @@ public class OrderService {
 		Optional<Order> order = repository.findById(id);
 		return order.get();
 	}
+	
+	public Order insert(Order order) {
+		Order newOrder = repository.save(order);
+		return newOrder;
+	}
+	
+	public void deleteById(Long id) {
+		repository.deleteById(id);
+	}
 }
