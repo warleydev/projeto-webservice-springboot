@@ -1,5 +1,6 @@
 package com.example.webservice.resources;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.webservice.entities.User;
 import com.example.webservice.services.UserService;
@@ -42,8 +44,10 @@ public class UserResource {
 
 	@PostMapping()
 	public ResponseEntity<User> insert(@RequestBody User user){
-		User newUser = service.insert(user);
-		return ResponseEntity.ok().body(newUser);
+		user = service.insert(user);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(user.getId()).toUri();
+		return ResponseEntity.created(uri).body(user);
 	}
 	
 }
