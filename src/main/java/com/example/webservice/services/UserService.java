@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.example.webservice.entities.User;
@@ -31,5 +30,17 @@ public class UserService {
 	
 	public void deleteById(Long id) {
 		repository.deleteById(id);
+	}
+	
+	public User update(Long id, User user){
+		User entity = repository.getReferenceById(id);
+		updateData(entity, user);
+		return repository.save(entity);
+	}
+
+	private void updateData(User entity, User user) {
+		entity.setEmail(user.getEmail());
+		entity.setName(user.getName());
+		entity.setPhone(user.getPhone());
 	}
 }
