@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.webservice.entities.Order;
-import com.example.webservice.repositories.OrderRepository;
 import com.example.webservice.services.OrderService;
 
 @RestController
@@ -23,9 +22,6 @@ import com.example.webservice.services.OrderService;
 public class OrderResource {
 	@Autowired
 	private OrderService service;
-	
-	@Autowired
-	private OrderRepository repository;
 	
 	@GetMapping
 	public ResponseEntity<List<Order>> findAll(){
